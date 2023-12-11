@@ -1,0 +1,4 @@
+DTaP Vaccine,1
+MMR Vaccine,2
+Hepatitis B Vaccine,2
+Influenza Vaccine,1
