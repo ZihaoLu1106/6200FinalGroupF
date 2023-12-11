@@ -15,9 +15,12 @@ public class Teacher implements PersonAPI {
     double credit;
 
     public Teacher(String s) {
+        
         String[] a = s.split(",");
         this.name = a[0];
+        a[1]=a[1].replace(" ", "");
         this.age = Integer.parseInt(a[1]);
+        a[2]=a[2].replace(" ", "");
         this.credit = Double.parseDouble(a[2]);
     }
 
@@ -47,5 +50,10 @@ public class Teacher implements PersonAPI {
 
     public void setCredit(double credit) {
         this.credit = credit;
+    }
+    
+    @Override
+    public String toString(){
+        return "Name:"+this.name+" age:"+this.age+" gpa:"+this.credit;
     }
 }

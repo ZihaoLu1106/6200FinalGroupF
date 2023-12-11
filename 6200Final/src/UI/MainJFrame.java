@@ -4,10 +4,16 @@
  */
 package UI;
 
+import DaysCare.Immunization.ImmunizationRecord;
+import DaysCare.Person.Student;
+import DaysCare.Person.Teacher;
+import DaysCare.SingletonAdmin;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.CardLayout;
+import java.util.Map;
 
 /**
  *
@@ -18,6 +24,7 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    SingletonAdmin admin;
     public MainJFrame() {
         initComponents();
     }
@@ -32,38 +39,49 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         MainJPanel = new javax.swing.JPanel();
-        btnStart = new javax.swing.JButton();
+        WelcomeJPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnStart.setText("Start");
+        MainJPanel.setLayout(new java.awt.CardLayout());
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
         jLabel1.setText("Welcome to DaysCare Immunization Tracking System!");
 
-        javax.swing.GroupLayout MainJPanelLayout = new javax.swing.GroupLayout(MainJPanel);
-        MainJPanel.setLayout(MainJPanelLayout);
-        MainJPanelLayout.setHorizontalGroup(
-            MainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MainJPanelLayout.createSequentialGroup()
-                .addGap(311, 311, 311)
-                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainJPanelLayout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150))
+        btnStart.setText("Start!");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout WelcomeJPanelLayout = new javax.swing.GroupLayout(WelcomeJPanel);
+        WelcomeJPanel.setLayout(WelcomeJPanelLayout);
+        WelcomeJPanelLayout.setHorizontalGroup(
+            WelcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WelcomeJPanelLayout.createSequentialGroup()
+                .addGroup(WelcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(WelcomeJPanelLayout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(WelcomeJPanelLayout.createSequentialGroup()
+                        .addGap(309, 309, 309)
+                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
-        MainJPanelLayout.setVerticalGroup(
-            MainJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainJPanelLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174))
+        WelcomeJPanelLayout.setVerticalGroup(
+            WelcomeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WelcomeJPanelLayout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(168, 168, 168)
+                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
+
+        MainJPanel.add(WelcomeJPanel, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,6 +96,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        // TODO add your handling code here:
+        ViewMain vm=new ViewMain(MainJPanel,admin);
+        MainJPanel.add("ViewMain",vm);
+        CardLayout layout=(CardLayout)MainJPanel.getLayout();
+        layout.next(MainJPanel);
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,6 +144,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainJPanel;
+    private javax.swing.JPanel WelcomeJPanel;
     private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

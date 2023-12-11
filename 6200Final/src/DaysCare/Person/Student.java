@@ -13,9 +13,12 @@ public class Student implements PersonAPI {
     int age;
     double grade;
     public Student(String s){
+        
         String []a = s.split(",");
 	this.name = a[0];
+        a[1]=a[1].replace(" ", "");
 	this.age = Integer.parseInt(a[1]);
+        a[2]=a[2].replace(" ", "");
 	this.grade = Double.parseDouble(a[2]);
     }
     public String getName() {
@@ -35,6 +38,11 @@ public class Student implements PersonAPI {
     @Override
     public void setAge(int age) {
         this.age = age;
+    }
+    
+    @Override
+    public String toString(){
+        return "Name:"+this.name+" age:"+this.age+" gpa:"+this.grade;
     }
     
 

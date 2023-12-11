@@ -13,9 +13,43 @@ import java.util.List;
  * @author JANFAN
  */
 public class Group {
-    
+    private Level level;
+    private int capacity;
     private Teacher teacher;
     private List<Student>studentList;
+    
+    public Group(int capacity,Teacher teacher,List<Student>studentList){
+        this.capacity=capacity;
+        this.teacher=teacher;
+        this.studentList=studentList;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    
+    public boolean addStudent(Student s){
+        if(studentList.size()>=capacity){
+            return false;
+        }else{
+            studentList.add(s);
+            return true;
+        }
+    }
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+    
+    
+    
     
     
     

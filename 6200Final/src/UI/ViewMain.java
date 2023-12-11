@@ -4,6 +4,9 @@
  */
 package UI;
 
+import DaysCare.SingletonAdmin;
+import javax.swing.JPanel;
+
 /**
  *
  * @author JANFAN
@@ -13,8 +16,13 @@ public class ViewMain extends javax.swing.JPanel {
     /**
      * Creates new form ViewMain
      */
-    public ViewMain() {
+    JPanel workArea;
+    SingletonAdmin admin;
+    public ViewMain(JPanel workArea,SingletonAdmin admin) {
         initComponents();
+        this.workArea=workArea;
+        this.admin=admin;
+        populateTable();
     }
 
     /**
@@ -30,17 +38,17 @@ public class ViewMain extends javax.swing.JPanel {
         tblClass = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnView = new javax.swing.JButton();
-        cbAges = new javax.swing.JComboBox<>();
+        cbLevels = new javax.swing.JComboBox<>();
 
         tblClass.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Class", "Number of Groups", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblClass);
@@ -49,7 +57,7 @@ public class ViewMain extends javax.swing.JPanel {
 
         btnView.setText("View Detail");
 
-        cbAges.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbLevels.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6-12", "13-24", "25-35", "36-47", "48-59", "60+" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -61,7 +69,7 @@ public class ViewMain extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbAges, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbLevels, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnView, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67))
         );
@@ -71,7 +79,7 @@ public class ViewMain extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cbAges, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(cbLevels, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -83,9 +91,13 @@ public class ViewMain extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnView;
-    private javax.swing.JComboBox<String> cbAges;
+    private javax.swing.JComboBox<String> cbLevels;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblClass;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

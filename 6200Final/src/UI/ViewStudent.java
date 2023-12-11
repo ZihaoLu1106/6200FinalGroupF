@@ -41,13 +41,13 @@ public class ViewStudent extends javax.swing.JPanel {
 
         tblImmunizationRecord.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Immunization", "Last Time", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblImmunizationRecord);

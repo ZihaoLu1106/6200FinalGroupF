@@ -27,7 +27,7 @@ public class ViewClass extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblGroup = new javax.swing.JTable();
+        tblStudentList = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnViewStudent = new javax.swing.JButton();
         cbGroup = new javax.swing.JComboBox<>();
@@ -36,18 +36,18 @@ public class ViewClass extends javax.swing.JPanel {
         btnViewTeacher = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        tblGroup.setModel(new javax.swing.table.DefaultTableModel(
+        tblStudentList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Student name", "Status"
             }
         ));
-        jScrollPane1.setViewportView(tblGroup);
+        jScrollPane1.setViewportView(tblStudentList);
 
         jLabel1.setText("View Class");
 
@@ -118,6 +118,6 @@ public class ViewClass extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTeacher;
-    private javax.swing.JTable tblGroup;
+    private javax.swing.JTable tblStudentList;
     // End of variables declaration//GEN-END:variables
 }
