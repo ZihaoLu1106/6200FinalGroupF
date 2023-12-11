@@ -7,6 +7,7 @@ package UI;
 import DaysCare.Organization.Classroom;
 import DaysCare.Organization.Group;
 import DaysCare.Person.Student;
+import DaysCare.Person.Teacher;
 import DaysCare.SingletonAdmin;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -27,6 +28,7 @@ public class ViewClass extends javax.swing.JPanel {
     JPanel workArea;
     SingletonAdmin admin;
     Classroom classroom;
+    Group group;
     public ViewClass() {
         initComponents();
     }
@@ -96,6 +98,11 @@ public class ViewClass extends javax.swing.JPanel {
         lblTeacher.setText("Null");
 
         btnViewTeacher.setText("View Teacher");
+        btnViewTeacher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewTeacherActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +185,15 @@ public class ViewClass extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);        // TODO add your handling code here:
     }//GEN-LAST:event_btnViewStudentActionPerformed
+
+    private void btnViewTeacherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewTeacherActionPerformed
+        // TODO add your handling code here:
+        Teacher teacher=this.group.getTeacher();
+        ViewTeacher vs = new ViewTeacher(workArea, admin, teacher);
+        workArea.add("ViewTeacher", vs);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewTeacherActionPerformed
 private void backAction() {
         workArea.remove(this);
         Component[] componentArray = workArea.getComponents();
@@ -201,6 +217,7 @@ private void backAction() {
     private void populate(Group group) {
         DefaultTableModel model = (DefaultTableModel) tblStudentList.getModel();
         model.setRowCount(0);
+        this.group=group;
         lblTeacher.setText(group.getTeacher().toString());
         for (Student s : group.getStudentList()) {
             Object[] row = new Object[2];

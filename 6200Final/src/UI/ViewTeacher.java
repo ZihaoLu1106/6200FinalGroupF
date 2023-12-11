@@ -4,6 +4,12 @@
  */
 package UI;
 
+import DaysCare.Person.Teacher;
+import DaysCare.SingletonAdmin;
+import javax.swing.JPanel;
+import java.awt.CardLayout;
+import java.awt.Component;
+
 /**
  *
  * @author JANFAN
@@ -13,8 +19,18 @@ public class ViewTeacher extends javax.swing.JPanel {
     /**
      * Creates new form ViewTeacher
      */
+    JPanel workArea;
+    SingletonAdmin admin;
+    Teacher teacher;
     public ViewTeacher() {
+        
+    }
+
+    ViewTeacher(JPanel workArea, SingletonAdmin admin, Teacher teacher) {
         initComponents();
+        this.admin=admin;
+        this.workArea=workArea;
+        this.teacher=teacher;
     }
 
     /**
@@ -26,19 +42,44 @@ public class ViewTeacher extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnBack = new javax.swing.JButton();
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnBack)
+                .addContainerGap(689, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnBack)
+                .addContainerGap(537, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        workArea.remove(this);
+        Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     // End of variables declaration//GEN-END:variables
 }
