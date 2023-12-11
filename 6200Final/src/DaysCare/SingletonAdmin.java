@@ -126,9 +126,47 @@ public class SingletonAdmin {
         
     }
     private static void distribute() {
-
+        //distribute student to group with teacher
+        for(Student s:studentList){
+            //get the student's immunization record list
+            List<ImmunizationRecord>recordList=studentMap.get(s);
+            //get the student's level
+            Level level=s.getLevel();
+            //get the student's group size
+            int groupSize=groupSizeMap.get(level);
+            //get the student's class size
+            int classSize=classSizeMap.get(level);
+            //get the student's classroom list
+            List<Classroom>classroomList=levelMap.get(level);
+            //get the student's group list
+            List<Group>groupList=classMap.get(classroomList.get(0));
+            //get the student's teacher list
+            List<Teacher>teacherList=instance.teacherList;
+            //get the student's immunization list
+            List<Immunization>immunizationList=instance.immunizationList;
+            //get the student's immunization record list
+            List<ImmunizationRecord>immunizationRecordList=studentMap.get(s);
+            //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList2=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList3=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList4=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList5=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList6=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList7=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList8=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList9=studentMap.get(s);
+            // //get the student's immunization record list
+            // List<ImmunizationRecord>immunizationRecordList10=studentMap.get(s);
+            //
     }
-    
+}
     
     
     
