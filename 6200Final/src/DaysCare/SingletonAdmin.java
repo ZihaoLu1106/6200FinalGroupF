@@ -27,7 +27,6 @@ public class SingletonAdmin {
     static Map<Level,List<Classroom>>levelMap;//each level has a list f classroom
     static Map<Classroom,List<Group>>classMap;//each classroom has a list of group
     static Map<Student,List<ImmunizationRecord>>studentMap;//each student has a list of thier list of immunizastion record
-    
     static Map<Level,Integer>groupSizeMap;//it will store the size of each group in different level
     static Map<Level,Integer>classSizeMap;//it will store the size of each class in different level
     
