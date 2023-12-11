@@ -27,6 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
     SingletonAdmin admin;
     public MainJFrame() {
         initComponents();
+        admin=SingletonAdmin.getInstance();
     }
 
     /**

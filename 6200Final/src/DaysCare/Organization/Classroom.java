@@ -16,7 +16,9 @@ public class Classroom {
     int classNum;
     int capacity;
     List<Group>gourpList;
-    public Classroom(){
+    public Classroom(int capacity,int classNum){
+        this.capacity=capacity;
+        this.classNum=classNum;
         gourpList=new ArrayList<>();
     }
     public Classroom(int capacity,int classNum,List<Group>gourpList){
@@ -43,6 +45,11 @@ public class Classroom {
 
     public int getCapacity() {
         return capacity;
+    }
+    
+    @Override
+    public String toString(){
+        return String.valueOf(classNum);
     }
     
     

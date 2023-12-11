@@ -42,7 +42,7 @@ public class Student implements PersonAPI {
     
     @Override
     public String toString(){
-        return "Name:"+this.name+" age:"+this.age+" gpa:"+this.grade;
+        return this.name;
     }
     
 

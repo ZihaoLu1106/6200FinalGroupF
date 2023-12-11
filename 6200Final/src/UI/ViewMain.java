@@ -4,8 +4,15 @@
  */
 package UI;
 
+import DaysCare.Organization.Classroom;
+import DaysCare.Organization.Level;
 import DaysCare.SingletonAdmin;
+import java.awt.CardLayout;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +29,7 @@ public class ViewMain extends javax.swing.JPanel {
         initComponents();
         this.workArea=workArea;
         this.admin=admin;
-        populateTable();
+        populateTable(Level.LEVEL6to12);
     }
 
     /**
@@ -63,6 +70,11 @@ public class ViewMain extends javax.swing.JPanel {
         });
 
         cbLevels.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6-12", "13-24", "25-35", "36-47", "48-59", "60+" }));
+        cbLevels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbLevelsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,7 +107,28 @@ public class ViewMain extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = tblClass.getSelectedRow();
+               if (selectedRowIndex < 0) {
+                          JOptionPane.showMessageDialog(this, "Please select a Classroom");
+                          return;
+               }
+               DefaultTableModel model = (DefaultTableModel) tblClass.getModel();
+               Classroom Classroom = (Classroom) model.getValueAt(selectedRowIndex, 0);
+               
+        ViewClass vm=new ViewClass(workArea,admin,Classroom);
+        workArea.add("ViewClass",vm);
+        CardLayout layout=(CardLayout)workArea.getLayout();
+        layout.next(workArea);
     }//GEN-LAST:event_btnViewActionPerformed
+
+    private void cbLevelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLevelsActionPerformed
+        // TODO add your handling code here:
+        String levelNum=cbLevels.getSelectedItem().toString();
+        Level level=checkLevel(levelNum);
+        System.out.println(levelNum);
+        System.out.println(level);
+        populateTable(level);
+    }//GEN-LAST:event_cbLevelsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -106,7 +139,32 @@ public class ViewMain extends javax.swing.JPanel {
     private javax.swing.JTable tblClass;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    private void populateTable(Level level) {
+        List<Classroom>classroomList=admin.getLevelMap().get(level);
+        DefaultTableModel model = (DefaultTableModel) tblClass.getModel();
+                      model.setRowCount(0);
+
+                      for (Classroom c : classroomList) {
+                                 Object[] row = new Object[3];
+                                 row[0] = c;
+                                 row[1] = c.getGourpList().size();
+                                 row[2] = "uncomplete";
+                                 model.addRow(row);
+                      }
+    }
+    private Level checkLevel(String s){
+        if(s.equals("6-12"))
+            return Level.LEVEL6to12;
+        else if(s.equals("13-24"))
+            return Level.LEVEL13to24;
+        else if(s.equals("25-35"))
+            return Level.LEVEL25to35;
+        else if(s.equals("36-47"))
+            return Level.LEVEL36to47;
+        else if(s.equals("48-59"))
+            return Level.LEVEL48to59;
+        else
+            return Level.LEVEL60ANDUP;
         
     }
 }

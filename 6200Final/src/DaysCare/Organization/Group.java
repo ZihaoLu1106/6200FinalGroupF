@@ -6,6 +6,7 @@ package DaysCare.Organization;
 
 import DaysCare.Person.Student;
 import DaysCare.Person.Teacher;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,16 +15,22 @@ import java.util.List;
  */
 public class Group {
     private Level level;
-    private int gourpNum;
+    private int groupNum;
     private int capacity;
     private Teacher teacher;
     private List<Student>studentList;
     
     public Group(int groupNum,int capacity,Teacher teacher,List<Student>studentList){
-        this.gourpNum=groupNum;
+        this.groupNum=groupNum;
         this.capacity=capacity;
         this.teacher=teacher;
         this.studentList=studentList;
+    }
+    public Group(int groupNum,int capacity,Teacher teacher){
+        this.groupNum=groupNum;
+        this.capacity=capacity;
+        this.teacher=teacher;
+        studentList=new ArrayList<>();
     }
 
     public Teacher getTeacher() {
@@ -48,6 +55,18 @@ public class Group {
 
     public void setLevel(Level level) {
         this.level = level;
+    }
+
+    public int getGourpNum() {
+        return groupNum;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+    @Override
+    public String toString(){
+        return String.valueOf(groupNum);
     }
     
     

@@ -4,6 +4,11 @@
  */
 package UI;
 
+import DaysCare.Organization.Classroom;
+import DaysCare.Organization.Group;
+import DaysCare.SingletonAdmin;
+import javax.swing.JPanel;
+
 /**
  *
  * @author JANFAN
@@ -13,8 +18,23 @@ public class ViewClass extends javax.swing.JPanel {
     /**
      * Creates new form ViewClass
      */
+    JPanel workArea;
+    SingletonAdmin admin;
+    Classroom classroom;
     public ViewClass() {
         initComponents();
+    }
+
+    ViewClass(JPanel workArea, SingletonAdmin admin, Classroom classroom) {
+        initComponents();
+        this.workArea=workArea;
+        this.admin=admin;
+        this.classroom=classroom;
+        
+        for(Group g:classroom.getGourpList()){
+            
+            cbGroup.addItem(g.toString());
+        }
     }
 
     /**
@@ -52,8 +72,6 @@ public class ViewClass extends javax.swing.JPanel {
         jLabel1.setText("View Class");
 
         btnViewStudent.setText("View Student");
-
-        cbGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Teacher's Name:");
 
