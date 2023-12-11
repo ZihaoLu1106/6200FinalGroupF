@@ -56,6 +56,11 @@ public class ViewMain extends javax.swing.JPanel {
         jLabel1.setText("View Class");
 
         btnView.setText("View Detail");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         cbLevels.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6-12", "13-24", "25-35", "36-47", "48-59", "60+" }));
 
@@ -88,6 +93,10 @@ public class ViewMain extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnView;
@@ -98,6 +107,6 @@ public class ViewMain extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }

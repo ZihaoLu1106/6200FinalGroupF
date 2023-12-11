@@ -14,11 +14,13 @@ import java.util.List;
  */
 public class Group {
     private Level level;
+    private int gourpNum;
     private int capacity;
     private Teacher teacher;
     private List<Student>studentList;
     
-    public Group(int capacity,Teacher teacher,List<Student>studentList){
+    public Group(int groupNum,int capacity,Teacher teacher,List<Student>studentList){
+        this.gourpNum=groupNum;
         this.capacity=capacity;
         this.teacher=teacher;
         this.studentList=studentList;
