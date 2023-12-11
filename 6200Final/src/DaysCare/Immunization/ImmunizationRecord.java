@@ -37,8 +37,17 @@ public class ImmunizationRecord {
         else
             isExpire=true;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public boolean isIsExpire() {
+        return isExpire;
+    }
+    
     @Override
     public String toString(){
-        return "Student:"+this.student+" Immunization:"+this.immunization+" date:"+this.date;
+        return this.immunization.toString();
     }
 }

@@ -35,7 +35,7 @@ public class Immunization {
     }
     @Override
     public String toString(){
-        return "Immunization Name:"+this.immunizationName+" Duration:"+this.duartion;
+        return this.immunizationName;
     }
     
     

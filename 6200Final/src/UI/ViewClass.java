@@ -6,8 +6,14 @@ package UI;
 
 import DaysCare.Organization.Classroom;
 import DaysCare.Organization.Group;
+import DaysCare.Person.Student;
 import DaysCare.SingletonAdmin;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,6 +41,7 @@ public class ViewClass extends javax.swing.JPanel {
             
             cbGroup.addItem(g.toString());
         }
+        populate(classroom.getGourpList().get(0));
     }
 
     /**
@@ -72,6 +79,17 @@ public class ViewClass extends javax.swing.JPanel {
         jLabel1.setText("View Class");
 
         btnViewStudent.setText("View Student");
+        btnViewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewStudentActionPerformed(evt);
+            }
+        });
+
+        cbGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGroupActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Teacher's Name:");
 
@@ -80,21 +98,26 @@ public class ViewClass extends javax.swing.JPanel {
         btnViewTeacher.setText("View Teacher");
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cbGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(214, 214, 214)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(244, 244, 244)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(72, 72, 72)
                         .addComponent(btnViewTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnViewStudent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1)
@@ -126,6 +149,42 @@ public class ViewClass extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        backAction();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void cbGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGroupActionPerformed
+        // TODO add your handling code here:
+        int num=Integer.parseInt(cbGroup.getSelectedItem().toString());
+        for(Group g:classroom.getGourpList()){
+            if(g.getGourpNum()==num){
+                populate(g);
+            }
+        }
+    }//GEN-LAST:event_cbGroupActionPerformed
+
+    private void btnViewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentActionPerformed
+        int selectedRowIndex = tblStudentList.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Classroom");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tblStudentList.getModel();
+        Student s = (Student) model.getValueAt(selectedRowIndex, 0);
+
+        ViewStudent vs = new ViewStudent(workArea, admin, s);
+        workArea.add("ViewStudent", vs);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.next(workArea);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewStudentActionPerformed
+private void backAction() {
+        workArea.remove(this);
+        Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -138,4 +197,16 @@ public class ViewClass extends javax.swing.JPanel {
     private javax.swing.JLabel lblTeacher;
     private javax.swing.JTable tblStudentList;
     // End of variables declaration//GEN-END:variables
+
+    private void populate(Group group) {
+        DefaultTableModel model = (DefaultTableModel) tblStudentList.getModel();
+        model.setRowCount(0);
+        lblTeacher.setText(group.getTeacher().toString());
+        for (Student s : group.getStudentList()) {
+            Object[] row = new Object[2];
+            row[0] = s;
+            row[1] = "uncomplete";
+            model.addRow(row);
+        }
+    }
 }

@@ -39,6 +39,11 @@ public class Student implements PersonAPI {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public double getGrade() {
+        return grade;
+    }
+    
     
     @Override
     public String toString(){

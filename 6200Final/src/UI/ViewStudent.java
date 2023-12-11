@@ -4,6 +4,15 @@
  */
 package UI;
 
+import DaysCare.Immunization.ImmunizationRecord;
+import DaysCare.Organization.Classroom;
+import DaysCare.Person.Student;
+import DaysCare.SingletonAdmin;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author JANFAN
@@ -13,8 +22,15 @@ public class ViewStudent extends javax.swing.JPanel {
     /**
      * Creates new form ViewStudent
      */
-    public ViewStudent() {
+    JPanel workArea;
+    SingletonAdmin admin;
+    Student student;
+    ViewStudent(JPanel workArea, SingletonAdmin admin, Student student) {
         initComponents();
+        this.student=student;
+        this.admin=admin;
+        this.workArea=workArea;
+        populate();
     }
 
     /**
@@ -38,6 +54,11 @@ public class ViewStudent extends javax.swing.JPanel {
         lblGPA = new javax.swing.JLabel();
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         tblImmunizationRecord.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,7 +97,7 @@ public class ViewStudent extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(57, 57, 57)
-                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -120,6 +141,15 @@ public class ViewStudent extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        workArea.remove(this);
+        Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -133,4 +163,21 @@ public class ViewStudent extends javax.swing.JPanel {
     private javax.swing.JLabel lblName;
     private javax.swing.JTable tblImmunizationRecord;
     // End of variables declaration//GEN-END:variables
+
+    private void populate() {
+        
+        lblName.setText(student.getName());
+        lblAge.setText(String.valueOf(student.getAge()));
+        lblGPA.setText(String.valueOf(student.getGrade()));
+        DefaultTableModel model = (DefaultTableModel) tblImmunizationRecord.getModel();
+        model.setRowCount(0);
+
+        for (ImmunizationRecord i: admin.getStudentMap().get(student)) {
+            Object[] row = new Object[3];
+            row[0] = i;
+            row[1] = i.getDate();
+            row[2] = i.isIsExpire();
+            model.addRow(row);
+        }
+    }
 }

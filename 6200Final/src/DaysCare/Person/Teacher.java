@@ -54,6 +54,6 @@ public class Teacher implements PersonAPI {
     
     @Override
     public String toString(){
-        return "Name:"+this.name+" age:"+this.age+" gpa:"+this.credit;
+        return this.name;
     }
 }
