@@ -98,6 +98,7 @@ public class SingletonAdmin {
             for(int j=0;j<instance.immunizationList.size();j++){
                 
                 ImmunizationRecord ir=new ImmunizationRecord(instance.immunizationList.get(j),instance.studentList.get(i),a[j+1]);
+                
                 recordList.add(ir);
             }
             //put the student and his/her immunization record list to hashmap;
