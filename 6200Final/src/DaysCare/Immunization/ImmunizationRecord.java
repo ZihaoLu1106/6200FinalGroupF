@@ -30,7 +30,7 @@ public class ImmunizationRecord {
         
         String []a = date.split("-");
         LocalDate date = LocalDate.of(Integer.parseInt(a[2]), Integer.parseInt(a[0]), Integer.parseInt(a[1]));
-        int result=(int) ChronoUnit.DAYS.between(from, date);
+        int result=(int) ChronoUnit.DAYS.between(date, from);
         int duration=immunization.duartion;
         if(result>=duration*365)
             isExpire=false;
