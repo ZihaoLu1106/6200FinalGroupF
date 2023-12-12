@@ -4,6 +4,7 @@
  */
 package UI;
 
+import DaysCare.Immunization.ImmunizationRecord;
 import DaysCare.Organization.Classroom;
 import DaysCare.Organization.Group;
 import DaysCare.Person.Student;
@@ -222,7 +223,18 @@ private void backAction() {
         for (Student s : group.getStudentList()) {
             Object[] row = new Object[2];
             row[0] = s;
-            row[1] = "uncomplete";
+            List<ImmunizationRecord>list=admin.getStudentMap().get(s);
+            boolean isComplete=true;
+            for(ImmunizationRecord i:list){
+                if(i.isIsExpire()==false){
+                    isComplete=false;
+                    break;
+                }
+            }
+            if(isComplete)
+                row[1] = "complete";
+            else
+                row[1] = "uncomplete";
             model.addRow(row);
         }
     }
