@@ -73,7 +73,7 @@ public class SingletonAdmin {
 
     private static void readImmunization() {
         //read immunizationrole file, which contains immunization name and duration
-        List<String> list = FileUtil.readFIle("src/DaysCare/Data/ImmunizationRole.txt");
+        List<String> list = FileUtil.readFIle("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/ImmunizationRole.txt");
         //use Lambda to turn all string to immunization object
         instance.immunizationList=list.stream()
                 .map(ImmunizationFactory.IMMUNIZATION::getImmunization)
@@ -81,8 +81,8 @@ public class SingletonAdmin {
 
     }
     private static void readStudentInformation() {
-        List<String> students = FileUtil.readFIle("src/DaysCare/Data/StudentData.txt");
-        List<String>records=FileUtil.readFIle("src/DaysCare/Data/ImmunizationRecord.txt");
+        List<String> students = FileUtil.readFIle("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/StudentData.txt");
+        List<String>records=FileUtil.readFIle("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/ImmunizationRecord.txt");
         //read student file and create all student object
         for(String s:students){
             instance.studentList.add((Student) PersonFactory.STUDENT.getPerson(s));  
@@ -106,7 +106,7 @@ public class SingletonAdmin {
         }
     }
     private static void readTeacher() {
-        List<String> teachers = FileUtil.readFIle("src/DaysCare/Data/TeacherData.txt");
+        List<String> teachers = FileUtil.readFIle("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/TeacherData.txt");
         //read teacher file and create all teacher object
         for(String s:teachers){
             instance.teacherList.add((Teacher) PersonFactory.TEACHER.getPerson(s));  
@@ -114,7 +114,7 @@ public class SingletonAdmin {
     }
     private static void readRatio() {
         //read group size data
-        List<String> groupSizeData = FileUtil.readFIle("src/DaysCare/Data/RatioRoleForStudentToTeacher.txt");
+        List<String> groupSizeData = FileUtil.readFIle("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/RatioRoleForStudentToTeacher.txt");
         for(String s:groupSizeData){
             String []a = s.split(",");
             Level level=Level.getType(Integer.parseInt(a[0]));
@@ -124,7 +124,7 @@ public class SingletonAdmin {
         }
         
         //read class size data
-        List<String> classSizeData = FileUtil.readFIle("src/DaysCare/Data/RatioRoleForGroupToClassRoom.txt");
+        List<String> classSizeData = FileUtil.readFIle("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/RatioRoleForGroupToClassRoom.txt");
         for(String s:classSizeData){
             String []a = s.split(",");
             Level level=Level.getType(Integer.parseInt(a[0]));
@@ -242,6 +242,21 @@ public class SingletonAdmin {
             }
     }
 }
+//This method is going to write the immunization record when student take shot
+    public static void updateImmunizationRecordFile() {
+        List<String> linesToWrite = new ArrayList<>();
+        for (Student s : studentList) {
+            StringBuilder line = new StringBuilder(s.getName());
+            List<ImmunizationRecord> records = studentMap.get(s);
+            for (ImmunizationRecord ir : records) {
+                line.append(", ").append(ir.getDate());
+            }
+            linesToWrite.add(line.toString());
+        }
+        // Use your file writing utility to overwrite the ImmunizationRecord.txt with the new data
+        FileUtil.writeToFile("/Users/tunisabadbear/IdeaProjects/6200FinalGroupF/6200FinalGroupF/6200Final/src/DaysCare/Data/ImmunizationRecord.txt", linesToWrite);
+    }
+
     
     
     

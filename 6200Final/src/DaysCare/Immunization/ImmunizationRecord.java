@@ -37,6 +37,14 @@ public class ImmunizationRecord {
         else
             isExpire=true;
     }
+    public void update(){
+        LocalDate today=LocalDate.now();
+        int day=today.getDayOfMonth();
+        int month=today.getMonthValue();
+        int year=today.getYear();
+        this.date=String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(year);
+        checkifExpire();
+    }
 
 
 
@@ -54,5 +62,9 @@ public class ImmunizationRecord {
     @Override
     public String toString(){
         return this.immunization.toString();
+    }
+    public String toFileString() {
+        // The file should have the student's name and the dates for each immunization
+        return student.getName() + ", " + date; // You can add more details as needed
     }
 }
