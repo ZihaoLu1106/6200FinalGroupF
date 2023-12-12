@@ -38,6 +38,10 @@ public class ImmunizationRecord {
             isExpire=true;
     }
 
+
+
+
+
     public String getDate() {
         return date;
     }
