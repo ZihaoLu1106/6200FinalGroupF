@@ -4,8 +4,11 @@
  */
 package UI;
 
+import DaysCare.Immunization.ImmunizationRecord;
 import DaysCare.Organization.Classroom;
+import DaysCare.Organization.Group;
 import DaysCare.Organization.Level;
+import DaysCare.Person.Student;
 import DaysCare.SingletonAdmin;
 import java.awt.CardLayout;
 import java.util.List;
@@ -149,7 +152,22 @@ public class ViewMain extends javax.swing.JPanel {
             Object[] row = new Object[3];
             row[0] = c;
             row[1] = c.getGourpList().size();
-            row[2] = "uncomplete";
+            boolean isComplete=true;
+            for(Group g:c.getGourpList()){
+                for(Student s:g.getStudentList()){
+                    List<ImmunizationRecord>il=admin.getStudentMap().get(s);
+                    for(ImmunizationRecord i:il){
+                        if(i.isIsExpire()==false){
+                            isComplete=false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(isComplete)
+                row[2] = "complete";
+            else
+                row[2] = "uncomplete";
             model.addRow(row);
         }
     }

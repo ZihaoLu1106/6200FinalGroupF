@@ -15,35 +15,32 @@ public class Teacher implements PersonAPI {
     double credit;
 
     public Teacher(String s) {
-        
+
         String[] a = s.split(",");
         this.name = a[0];
-        a[1]=a[1].replace(" ", "");
+        a[1] = a[1].replace(" ", "");
         this.age = Integer.parseInt(a[1]);
-        a[2]=a[2].replace(" ", "");
+        a[2] = a[2].replace(" ", "");
         this.credit = Double.parseDouble(a[2]);
     }
 
-    @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return name;
     }
 
-    @Override
     public void setName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.name = name;
     }
 
-    @Override
     public int getAge() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return age;
     }
 
-    @Override
     public void setAge(int age) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.age = age;
     }
 
+    
     public double getCredit() {
         return credit;
     }
@@ -51,9 +48,9 @@ public class Teacher implements PersonAPI {
     public void setCredit(double credit) {
         this.credit = credit;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 }

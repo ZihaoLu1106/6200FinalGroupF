@@ -183,7 +183,10 @@ public class ViewStudent extends javax.swing.JPanel {
             Object[] row = new Object[3];
             row[0] = i;
             row[1] = i.getDate();
-            row[2] = i.isIsExpire();
+            if(i.isIsExpire())
+                row[2] = "Complete";
+            else
+                row[2] = "Expired";
             model.addRow(row);
         }
     }
