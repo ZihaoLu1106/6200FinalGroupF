@@ -143,7 +143,7 @@ public class ViewMain extends javax.swing.JPanel {
     private javax.swing.JTable tblClass;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable(Level level) {
+    public void populateTable(Level level) {
         List<Classroom> classroomList = admin.getLevelMap().get(level);
         DefaultTableModel model = (DefaultTableModel) tblClass.getModel();
         model.setRowCount(0);

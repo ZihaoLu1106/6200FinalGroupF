@@ -37,6 +37,14 @@ public class ImmunizationRecord {
         else
             isExpire=true;
     }
+    public void update(){
+        LocalDate today=LocalDate.now();
+        int day=today.getDayOfMonth();
+        int month=today.getMonthValue();
+        int year=today.getYear();
+        this.date=String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(year);
+        checkifExpire();
+    }
 
 
 

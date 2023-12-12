@@ -7,6 +7,7 @@ package UI;
 import DaysCare.Immunization.ImmunizationRecord;
 import DaysCare.Organization.Classroom;
 import DaysCare.Organization.Group;
+import DaysCare.Organization.Level;
 import DaysCare.Person.Student;
 import DaysCare.Person.Teacher;
 import DaysCare.SingletonAdmin;
@@ -181,7 +182,7 @@ public class ViewClass extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblStudentList.getModel();
         Student s = (Student) model.getValueAt(selectedRowIndex, 0);
 
-        ViewStudent vs = new ViewStudent(workArea, admin, s);
+        ViewStudent vs = new ViewStudent(workArea, admin, s,group);
         workArea.add("ViewStudent", vs);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.next(workArea);        // TODO add your handling code here:
@@ -199,6 +200,8 @@ private void backAction() {
         workArea.remove(this);
         Component[] componentArray = workArea.getComponents();
         Component component = componentArray[componentArray.length - 1];
+        ViewMain vm=(ViewMain)component;
+        vm.populateTable(Level.LEVEL6to12);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.previous(workArea);
     }
@@ -215,7 +218,7 @@ private void backAction() {
     private javax.swing.JTable tblStudentList;
     // End of variables declaration//GEN-END:variables
 
-    private void populate(Group group) {
+    public void populate(Group group) {
         DefaultTableModel model = (DefaultTableModel) tblStudentList.getModel();
         model.setRowCount(0);
         this.group=group;
