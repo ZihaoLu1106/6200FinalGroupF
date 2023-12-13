@@ -48,8 +48,8 @@ public class SingletonAdmin {
         studentList = new ArrayList<>();
         teacherList = new ArrayList<>();
         
-        groupNum=0;
-        classNum=0;
+        groupNum=1;
+        classNum=1;
 
     }
 
@@ -66,7 +66,8 @@ public class SingletonAdmin {
         initializeMap();
         //6.distribution student and teacher to each group and class
         distribute();
-        
+        //7. public API, write to file
+        writeFile();
 
         return instance;
     }
@@ -134,6 +135,8 @@ public class SingletonAdmin {
         }
         
     }
+
+
     
     private static void initializeMap(){
         for (Map.Entry<Level, Integer> classSizeset
@@ -221,6 +224,7 @@ public class SingletonAdmin {
                         isFindGroup=true;
                     }
                 }
+                classMap.put(tempClass, tempClass.getGourpList());
             }
             
             if(isFindClass==false){//if all classroom is full, we need to create a new classroom
@@ -228,7 +232,7 @@ public class SingletonAdmin {
                 levelMap.get(level).add(newClassroom);
                 Group newGroup=createGroup(groupSizeMap.get(level));//create new group
                 newClassroom.addGroup(newGroup);
-                //classMap.put(newClassroom,newClassroom.getGourpList());
+                classMap.put(newClassroom,newClassroom.getGourpList());
                 
                 targetClassroom=newClassroom;
                 targetGroup=newGroup;
@@ -245,7 +249,10 @@ public class SingletonAdmin {
     
     
     
-    
+    public static String writeFile(){
+        return FileUtil.writeToFile();
+    }
+
     
 
     public static Map<Level, List<Classroom>> getLevelMap() {

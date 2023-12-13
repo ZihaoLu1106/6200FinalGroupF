@@ -61,6 +61,8 @@ public class ImmunizationRecord {
     
     @Override
     public String toString(){
-        return this.immunization.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.immunization.toString()).append(' ').append(this.date);
+        return sb.toString();
     }
 }
