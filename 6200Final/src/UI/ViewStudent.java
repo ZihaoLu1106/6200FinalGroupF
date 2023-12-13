@@ -6,12 +6,10 @@ package UI;
 
 import DaysCare.Immunization.ImmunizationRecord;
 import DaysCare.Organization.Classroom;
-import DaysCare.Organization.Group;
 import DaysCare.Person.Student;
 import DaysCare.SingletonAdmin;
 import java.awt.CardLayout;
 import java.awt.Component;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,13 +25,11 @@ public class ViewStudent extends javax.swing.JPanel {
     JPanel workArea;
     SingletonAdmin admin;
     Student student;
-    Group group;
-    ViewStudent(JPanel workArea, SingletonAdmin admin, Student student,Group group) {
+    ViewStudent(JPanel workArea, SingletonAdmin admin, Student student) {
         initComponents();
         this.student=student;
         this.admin=admin;
         this.workArea=workArea;
-        this.group=group;
         populate();
     }
 
@@ -56,7 +52,7 @@ public class ViewStudent extends javax.swing.JPanel {
         lblAge = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblGPA = new javax.swing.JLabel();
-        btnTakeShot = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -92,12 +88,7 @@ public class ViewStudent extends javax.swing.JPanel {
 
         lblGPA.setText("jLabel5");
 
-        btnTakeShot.setText("Take Shot");
-        btnTakeShot.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTakeShotActionPerformed(evt);
-            }
-        });
+        jButton1.setText("Take Shot");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -121,7 +112,7 @@ public class ViewStudent extends javax.swing.JPanel {
                             .addGap(57, 57, 57)
                             .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTakeShot, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnBack)
@@ -143,7 +134,7 @@ public class ViewStudent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblName)
-                    .addComponent(btnTakeShot))
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -161,30 +152,14 @@ public class ViewStudent extends javax.swing.JPanel {
         workArea.remove(this);
         Component[] componentArray = workArea.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ViewClass vc=(ViewClass)component;
-        vc.populate(group);
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.previous(workArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnTakeShotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTakeShotActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = tblImmunizationRecord.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a Vaccine");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel) tblImmunizationRecord.getModel();
-        ImmunizationRecord i = (ImmunizationRecord) model.getValueAt(selectedRowIndex, 0);
-        i.update();
-        SingletonAdmin.updateImmunizationRecordFile();//write to ImmunizationRecord file
-        populate();
-    }//GEN-LAST:event_btnTakeShotActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnTakeShot;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
