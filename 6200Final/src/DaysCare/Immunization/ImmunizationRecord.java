@@ -17,11 +17,13 @@ public class ImmunizationRecord {
     Student student;
     String date;
     boolean isExpire;
+    String expireDate;
     public ImmunizationRecord(Immunization immunization,Student student,String date){
         this.immunization=immunization;
         this.student=student;
         this.date=date;
         this.date=this.date.replace(" ", "");
+        this.expireDate="";
         checkifExpire();
     }
 
@@ -29,13 +31,18 @@ public class ImmunizationRecord {
         LocalDate from=LocalDate.now();
         
         String []a = date.split("-");
-        LocalDate date = LocalDate.of(Integer.parseInt(a[2]), Integer.parseInt(a[0]), Integer.parseInt(a[1]));
-        int result=(int) ChronoUnit.DAYS.between(date, from);
+        LocalDate lastdate = LocalDate.of(Integer.parseInt(a[2]), Integer.parseInt(a[0]), Integer.parseInt(a[1]));
+        //System.out.println("lastdate: "+lastdate);
+        int result=(int) ChronoUnit.DAYS.between(lastdate, from);
         int duration=immunization.duartion;
         if(result>=duration*365)
             isExpire=false;
         else
             isExpire=true;
+        
+        LocalDate nextdate=lastdate.plusDays(duration*365);
+        //System.out.println("nextdate: "+nextdate);
+        this.expireDate=String.valueOf(nextdate.getMonthValue())+"-"+String.valueOf(nextdate.getDayOfMonth())+"-"+String.valueOf(nextdate.getYear());
     }
     public void update(){
         LocalDate today=LocalDate.now();
@@ -57,6 +64,10 @@ public class ImmunizationRecord {
 
     public boolean isIsExpire() {
         return isExpire;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
     }
     
     @Override

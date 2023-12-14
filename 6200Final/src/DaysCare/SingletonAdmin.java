@@ -167,7 +167,7 @@ public class SingletonAdmin {
     private static void distribute() {
         //distribute student to group with teacher
         for(Student s:studentList){
-            System.out.println(s);
+            //System.out.println(s);
             //get the student's level
             Level level=Level.getType(s.getAge());// we get level
             //get the student's group size
