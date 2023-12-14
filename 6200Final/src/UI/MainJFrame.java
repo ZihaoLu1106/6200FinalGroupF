@@ -10,6 +10,7 @@ import DaysCare.Person.Teacher;
 import DaysCare.SingletonAdmin;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.CardLayout;
@@ -27,8 +28,15 @@ public class MainJFrame extends javax.swing.JFrame {
     SingletonAdmin admin;
     public MainJFrame() {
         initComponents();
-        admin=SingletonAdmin.getInstance();
+        try {
+            admin = SingletonAdmin.getInstance();
+        } catch (IOException e) {
+            // Handle exception (e.g., show an error dialog)
+            System.err.println("Failed to initialize application: " + e.getMessage());
+            // Consider exiting the application or disabling certain features
+        }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
