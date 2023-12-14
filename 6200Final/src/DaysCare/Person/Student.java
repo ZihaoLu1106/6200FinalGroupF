@@ -4,6 +4,8 @@
  */
 package DaysCare.Person;
 
+import java.util.Objects;
+
 /**
  *
  * @author JANFAN
@@ -48,6 +50,21 @@ public class Student implements PersonAPI {
     @Override
     public String toString(){
         return this.name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Student student = (Student) obj;
+        return age == student.age &&
+                Objects.equals(name, student.name) &&
+                Objects.equals(grade, student.grade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, grade);
     }
     
 
