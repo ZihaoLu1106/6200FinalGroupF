@@ -177,7 +177,7 @@ public class ViewStudent extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblImmunizationRecord.getModel();
         ImmunizationRecord i = (ImmunizationRecord) model.getValueAt(selectedRowIndex, 0);
         i.update();
-        SingletonAdmin.updateImmunizationRecordFile();//write to ImmunizationRecord file
+
         populate();
     }//GEN-LAST:event_btnTakeShotActionPerformed
 

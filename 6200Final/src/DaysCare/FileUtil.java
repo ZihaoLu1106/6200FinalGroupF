@@ -70,12 +70,10 @@ class FileUtil {
                     System.out.println("\tStudent: " + student + " \\ Age: " + student.getAge());
                     System.out.println("\tRecords: ");
                     for(ImmunizationRecord i : records){
-                        System.out.println("\t\t"+i);
+                        System.out.println("\t\t"+i.getRecords());
                         sb.append(i.toString() + '\n');
                     }
-
                 }
-
             }
             System.out.println();
         }
@@ -88,7 +86,7 @@ class FileUtil {
             System.out.println("Fail to write to File: " + e.getMessage());
         }
 
-        return "";
+        return sb.toString();
     }
 
 

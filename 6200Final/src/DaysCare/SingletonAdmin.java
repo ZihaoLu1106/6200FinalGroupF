@@ -137,11 +137,10 @@ public class SingletonAdmin {
     }
 
 
-    
     private static void initializeMap(){
         for (Map.Entry<Level, Integer> classSizeset
                                           : classSizeMap.entrySet()) {
-            Group group=createGroup(groupSizeMap.get(classSizeset.getKey()));
+            Group group = createGroup(groupSizeMap.get(classSizeset.getKey()),0);
             Classroom classroom=createClassroom(classSizeset.getValue());
             List<Classroom>tempClassroomList=new ArrayList<>();
             tempClassroomList.add(classroom);
@@ -152,9 +151,9 @@ public class SingletonAdmin {
             
         }
     }
-    private static Group createGroup(int capacity){
+    private static Group createGroup(int capacity,int num){
         Teacher teacher=teacherList.get(groupNum);
-        Group group=new Group(groupNum,capacity,teacher);
+        Group group=new Group(num+1,capacity,teacher);
         groupNum++;
         return group;
     }
@@ -209,7 +208,7 @@ public class SingletonAdmin {
                     Group tempGroup=tempClass.getGourpList().get(tempClass.getGourpList().size()-1);//last group
                     if(tempGroup.getStudentList().size()>=tempGroup.getCapacity()){//if the last group is full
                         //create new group
-                        Group newGroup=createGroup(groupSizeMap.get(level));
+                        Group newGroup=createGroup(groupSizeMap.get(level),tempClass.getGourpList().size());
                         tempClass.addGroup(newGroup);
                        // classMap.get(tempClass).add(newGroup);
                         targetClassroom=tempClass;
@@ -230,7 +229,7 @@ public class SingletonAdmin {
             if(isFindClass==false){//if all classroom is full, we need to create a new classroom
                 Classroom newClassroom=createClassroom(classSizeMap.get(level));//create new classroom
                 levelMap.get(level).add(newClassroom);
-                Group newGroup=createGroup(groupSizeMap.get(level));//create new group
+                Group newGroup=createGroup(groupSizeMap.get(level), 0);//create new group
                 newClassroom.addGroup(newGroup);
                 classMap.put(newClassroom,newClassroom.getGourpList());
                 
@@ -244,15 +243,32 @@ public class SingletonAdmin {
             if(targetGroup.addStudent(s)){
                 System.out.println("Success student "+s+" group:"+targetGroup.getGourpNum()+" class:"+targetClassroom.getClassNum());
             }
+        }
     }
-}
-    
+
+    private static void distribute(Map<Student, List<ImmunizationRecord>> record){
+
+    }
     
     
     public static String writeFile(){
         return FileUtil.writeToFile();
     }
 
+
+//    public static void updateImmunizationRecordFile() {
+//        List<String> linesToWrite = new ArrayList<>();
+//        for (Student s : studentList) {
+//            StringBuilder line = new StringBuilder(s.getName());
+//            List<ImmunizationRecord> records = studentMap.get(s);
+//            for (ImmunizationRecord ir : records) {
+//                line.append(", ").append(ir.getDate());
+//            }
+//            linesToWrite.add(line.toString());
+//        }
+//        // Use your file writing utility to overwrite the output.txt with the new data
+//        FileUtil.writeToFile();
+//    }
     
 
     public static Map<Level, List<Classroom>> getLevelMap() {

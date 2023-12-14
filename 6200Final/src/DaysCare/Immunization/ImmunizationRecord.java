@@ -44,6 +44,7 @@ public class ImmunizationRecord {
         int year=today.getYear();
         this.date=String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(year);
         checkifExpire();
+        System.out.println("Student take " + this.immunization.toString() + " Date: " + this.date);
     }
 
 
@@ -61,8 +62,13 @@ public class ImmunizationRecord {
     
     @Override
     public String toString(){
+        return this.immunization.toString();
+    }
+
+    public String getRecords(){
         StringBuilder sb = new StringBuilder();
-        sb.append(this.immunization.toString()).append(' ').append(this.date);
+        sb.append(this.immunization.getImmunizationName()).append(' ').append(this.date);
         return sb.toString();
     }
+
 }
