@@ -29,7 +29,7 @@ public class ImmunizationRecord {
 
     private void checkifExpire() {
         LocalDate from=LocalDate.now();
-        
+
         String []a = date.split("-");
         LocalDate lastdate = LocalDate.of(Integer.parseInt(a[2]), Integer.parseInt(a[0]), Integer.parseInt(a[1]));
         //System.out.println("lastdate: "+lastdate);
@@ -39,7 +39,7 @@ public class ImmunizationRecord {
             isExpire=false;
         else
             isExpire=true;
-        
+
         LocalDate nextdate=lastdate.plusDays(duration*365);
         //System.out.println("nextdate: "+nextdate);
         this.expireDate=String.valueOf(nextdate.getMonthValue())+"-"+String.valueOf(nextdate.getDayOfMonth())+"-"+String.valueOf(nextdate.getYear());
@@ -51,7 +51,10 @@ public class ImmunizationRecord {
         int year=today.getYear();
         this.date=String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(year);
         checkifExpire();
+        System.out.println("Student " + this.student.toString() + " take " + this.immunization.toString() + " Date: " + this.date);
     }
+
+
 
 
 
@@ -69,13 +72,16 @@ public class ImmunizationRecord {
     public String getExpireDate() {
         return expireDate;
     }
-    
+
     @Override
     public String toString(){
         return this.immunization.toString();
     }
-    public String toFileString() {
-        // The file should have the student's name and the dates for each immunization
-        return student.getName() + ", " + date; // You can add more details as needed
+
+    public String getRecords(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.immunization.getImmunizationName()).append(", Shot Taken On: ").append(this.date);
+        return sb.toString();
     }
+
 }
