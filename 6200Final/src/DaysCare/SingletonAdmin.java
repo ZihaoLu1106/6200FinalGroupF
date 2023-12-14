@@ -7,16 +7,20 @@ package DaysCare;
 import DaysCare.Immunization.Immunization;
 import DaysCare.Immunization.ImmunizationFactory;
 import DaysCare.Immunization.ImmunizationRecord;
+import DaysCare.Immunization.RegistrationRecord;
 import DaysCare.Organization.Classroom;
 import DaysCare.Organization.Group;
 import DaysCare.Organization.Level;
 import DaysCare.Person.PersonFactory;
 import DaysCare.Person.Student;
 import DaysCare.Person.Teacher;
-import java.util.ArrayList;
-import java.util.HashMap;
+
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +38,10 @@ public class SingletonAdmin {
     static List<Teacher> teacherList;//used to store all teachers
     static List<Immunization> immunizationList;//use to store all immunizations
     private static final SingletonAdmin instance = new SingletonAdmin();
-    
+    private static Map<Student, RegistrationRecord> registrationMap = new HashMap<>();//use to store registration data
+
+
+
     static int groupNum;
     static int classNum;
 
@@ -53,21 +60,24 @@ public class SingletonAdmin {
 
     }
 
-    public static SingletonAdmin getInstance() {
+    public static SingletonAdmin getInstance() throws IOException {
         //1.read immunization file
         readImmunization();
         //2.read student file and immunization file
         readStudentInformation();
-        //3.read teacher file ratio rule file 
+        //3.read teacher file ratio rule file
+        readStudentRegistration();
+        //4. read Student Registration information
         readTeacher();
-        //4.read ratio file and store the level and capatity to hash map
+        //5.read ratio file and store the level and capatity to hash map
         readRatio();
-        //5.initailize hashmaps
+        //6.initailize hashmaps
         initializeMap();
-        //6.distribution student and teacher to each group and class
+        //7.distribution student and teacher to each group and class
         distribute();
-        //7. public API, write to file
+        //8. public API, write to file
         writeFile();
+
 
         return instance;
     }
@@ -162,7 +172,40 @@ public class SingletonAdmin {
         classNum++;
         return classroom;
     }
-    
+
+    private static void readStudentRegistration() {
+        List<String> immunizationData = FileUtil.readFIle("src/DaysCare/Data/ImmunizationRecord.txt");
+
+        for (String line : immunizationData) {
+            String[] parts = line.split(",");
+            String studentName = parts[0].trim();
+            String[] dates = Arrays.copyOfRange(parts, 1, parts.length);
+            String earliestDate = getEarliestDate(dates);
+
+            Student student = studentList.stream()
+                    .filter(s -> s.getName().equals(studentName))
+                    .findFirst()
+                    .orElse(null);
+
+            if (student != null) {
+                RegistrationRecord registrationRecord = new RegistrationRecord(student, earliestDate, "Not Registered");
+                registrationMap.put(student, registrationRecord);
+            }
+        }
+    }
+
+    private static String getEarliestDate(String[] dates) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        return Arrays.stream(dates)
+                .map(String::trim)
+                .map(date -> LocalDate.parse(date, formatter))
+                .min(LocalDate::compareTo)
+                .map(formatter::format)
+                .orElse("");
+    }
+
+
+
     private static void distribute() {
         //distribute student to group with teacher
         for(Student s:studentList){
@@ -293,6 +336,10 @@ public class SingletonAdmin {
 
     public static List<Student> getStudentList() {
         return studentList;
+    }
+
+    public static Map<Student, RegistrationRecord> getRegistrationMap() {
+        return registrationMap;
     }
 
     public List<Teacher> getTeacherList() {
