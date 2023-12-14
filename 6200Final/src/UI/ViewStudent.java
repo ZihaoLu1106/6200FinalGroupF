@@ -4,16 +4,22 @@
  */
 package UI;
 
+import DaysCare.FileUtil;
 import DaysCare.Immunization.ImmunizationRecord;
+import DaysCare.Immunization.RegistrationRecord;
 import DaysCare.Organization.Classroom;
 import DaysCare.Organization.Group;
 import DaysCare.Person.Student;
 import DaysCare.SingletonAdmin;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -57,6 +63,20 @@ public class ViewStudent extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         lblGPA = new javax.swing.JLabel();
         btnTakeShot = new javax.swing.JButton();
+        tblImmunizationRecord1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane2.setViewportView(tblImmunizationRecord1);
+
+        //register button
+        btnRegister = new javax.swing.JButton();
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -66,17 +86,30 @@ public class ViewStudent extends javax.swing.JPanel {
         });
 
         tblImmunizationRecord.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Immunization", "Last Time", "Expire Date", "Status"
-            }
+                new Object [][] {
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String [] {
+                        "Immunization", "Last Time", "Expire Date", "Status"
+                }
+        ));
+
+        tblImmunizationRecord1.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                        {null, null, null},
+                        {null, null, null},
+                        {null, null, null},
+                        {null, null, null}
+                },
+                new String [] {
+                        "Last Registration Time", "Next Registration Time", "Status"
+                }
         ));
         jScrollPane1.setViewportView(tblImmunizationRecord);
+        jScrollPane2.setViewportView(tblImmunizationRecord1);
 
         jLabel1.setText("Student' Information");
 
@@ -102,57 +135,62 @@ public class ViewStudent extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(lblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(57, 57, 57)
-                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTakeShot, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnBack)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(254, 254, 254))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jLabel3)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(lblGPA, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jLabel2)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(lblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addComponent(jLabel4)
+                                                        .addGap(57, 57, 57)
+                                                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(btnTakeShot, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(btnBack)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(254, 254, 254))))
+                                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblName)
-                    .addComponent(btnTakeShot))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblAge))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblGPA))
-                .addContainerGap(158, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnBack))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(lblName)
+                                        .addComponent(btnTakeShot)
+                                        .addComponent(btnRegister))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(lblAge))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(lblGPA))
+                                .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -167,6 +205,7 @@ public class ViewStudent extends javax.swing.JPanel {
         layout.previous(workArea);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    //Action Listener for registration
     private void btnTakeShotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTakeShotActionPerformed
         // TODO add your handling code here:
         int selectedRowIndex = tblImmunizationRecord.getSelectedRow();
@@ -177,9 +216,54 @@ public class ViewStudent extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblImmunizationRecord.getModel();
         ImmunizationRecord i = (ImmunizationRecord) model.getValueAt(selectedRowIndex, 0);
         i.update();
-        SingletonAdmin.updateImmunizationRecordFile();//write to ImmunizationRecord file
+        FileUtil.writeToFile(); // This will use the updated records to write to the file
         populate();
     }//GEN-LAST:event_btnTakeShotActionPerformed
+
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
+        // Get the selected row in the registration table
+        int selectedRowIndex = tblImmunizationRecord1.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a record to register.");
+            return;
+        }
+
+        DefaultTableModel registrationModel = (DefaultTableModel) tblImmunizationRecord1.getModel();
+        // Check if the selected record is already registered
+        String status = (String) registrationModel.getValueAt(selectedRowIndex, 2);
+        if ("Registered".equals(status)) {
+            JOptionPane.showMessageDialog(this, "Already registered.");
+            return;
+        }
+
+        // Update the status to "Registered"
+        registrationModel.setValueAt("Registered", selectedRowIndex, 2);
+
+        // Update the last registration date to today and next registration date to one year later
+        LocalDate today = LocalDate.now();
+        LocalDate nextYear = today.plusYears(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        String lastRegistrationDate = today.format(formatter);
+        String nextRegistrationDate = nextYear.format(formatter);
+
+        // Get the student's registration record and update it
+        RegistrationRecord registrationRecord = admin.getRegistrationMap().get(student);
+        if (registrationRecord != null) {
+            registrationRecord.updateRegistration(lastRegistrationDate, "Registered");
+        }
+
+        // Update the table to reflect the changes
+        registrationModel.setValueAt(lastRegistrationDate, selectedRowIndex, 0); // Update last registration date
+        registrationModel.setValueAt(nextRegistrationDate, selectedRowIndex, 1); // Update next registration date
+
+        // Optionally, save the updated status to a file or database
+        FileUtil.writeToFile(); // Call this to save the updated registration info to output.txt
+
+        // Refresh the table to show updated status
+        tblImmunizationRecord1.repaint();
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -194,27 +278,68 @@ public class ViewStudent extends javax.swing.JPanel {
     private javax.swing.JLabel lblGPA;
     private javax.swing.JLabel lblName;
     private javax.swing.JTable tblImmunizationRecord;
+    private javax.swing.JTable tblImmunizationRecord1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton btnRegister;
     // End of variables declaration//GEN-END:variables
 
-    private void populate() {
+    // Method to find the earliest date
+    private String getEarliestDate(List<String> dates) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        return dates.stream()
+                .map(date -> LocalDate.parse(date, formatter))
+                .min(LocalDate::compareTo)
+                .map(formatter::format)
+                .orElse(""); // default if no date is found
+    }
 
+    // Method to calculate next registration date
+    private String getNextRegistrationDate(String lastRegistrationDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        LocalDate lastDate = LocalDate.parse(lastRegistrationDate, formatter);
+        return lastDate.plusYears(1).format(formatter);
+    }
+    private void populate() {
         lblName.setText(student.getName());
         lblAge.setText(String.valueOf(student.getAge()));
         lblGPA.setText(String.valueOf(student.getGrade()));
-        DefaultTableModel model = (DefaultTableModel) tblImmunizationRecord.getModel();
-        model.setRowCount(0);
+        DefaultTableModel immunizationModel = (DefaultTableModel) tblImmunizationRecord.getModel();
+        immunizationModel.setRowCount(0);
+
+        // Assuming the student's immunization dates are stored in a list, get the earliest date
+        List<String> immunizationDates = new ArrayList<>();
 
         for (ImmunizationRecord i: admin.getStudentMap().get(student)) {
             Object[] row = new Object[4];
-            row[0] = i;
+            row[0] = i; // Update this getter method based on your actual method name
             row[1] = i.getDate();
-            row[2]=i.getExpireDate();
-            if(i.isIsExpire())
-                row[3] = "Complete";
-            else
-                row[3] = "Expired";
-            model.addRow(row);
+            row[2] = i.getExpireDate();
+            row[3] = i.isIsExpire() ? "Complete" : "Expired";
+            immunizationModel.addRow(row);
+
+            // Add the date to the list for later comparison
+            immunizationDates.add(i.getDate());
+        }
+
+        // Now, immunizationDates is populated with actual dates
+        String lastRegistrationTime = getEarliestDate(immunizationDates);
+
+        // Check if lastRegistrationTime is not empty to avoid DateTimeParseException
+        if (!lastRegistrationTime.isEmpty()) {
+            String nextRegistrationTime = getNextRegistrationDate(lastRegistrationTime);
+
+            // New model for registration table
+            DefaultTableModel registrationModel = (DefaultTableModel) tblImmunizationRecord1.getModel();
+            registrationModel.setRowCount(0); // Clear existing rows
+
+            // Populate tblImmunizationRecord1 with registration info
+            registrationModel.addRow(new Object[] {
+                    lastRegistrationTime,
+                    nextRegistrationTime,
+                    "Not Registered" // default status
+            });
         }
     }
-}
 
+
+}
