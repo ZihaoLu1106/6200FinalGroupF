@@ -118,7 +118,7 @@ public class ViewMain extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) tblClass.getModel();
         Classroom Classroom = (Classroom) model.getValueAt(selectedRowIndex, 0);
-
+        cbLevels.setSelectedIndex(0);
         ViewClass vm = new ViewClass(workArea, admin, Classroom);
         workArea.add("ViewClass", vm);
         CardLayout layout = (CardLayout) workArea.getLayout();
