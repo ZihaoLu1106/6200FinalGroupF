@@ -67,13 +67,13 @@ public class ViewStudent extends javax.swing.JPanel {
 
         tblImmunizationRecord.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null}
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
                 },
                 new String [] {
-                        "Immunization", "Last Time", "Status"
+                        "Immunization", "Last Time", "Expire Date", "Status"
                 }
         ));
         jScrollPane1.setViewportView(tblImmunizationRecord);
@@ -205,15 +205,15 @@ public class ViewStudent extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (ImmunizationRecord i: admin.getStudentMap().get(student)) {
-            Object[] row = new Object[3];
+            Object[] row = new Object[4];
             row[0] = i;
             row[1] = i.getDate();
+            row[2]=i.getExpireDate();
             if(i.isIsExpire())
-                row[2] = "Complete";
+                row[3] = "Complete";
             else
-                row[2] = "Expired";
+                row[3] = "Expired";
             model.addRow(row);
         }
     }
 }
-
