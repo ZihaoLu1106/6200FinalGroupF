@@ -22,7 +22,7 @@ import java.util.Map;
 public class FileUtil {
     public static List<String> readFIle(String filePath) {
 		List<String> list=new ArrayList<>();
-        filePath = System.getProperty("user.dir") + "/6200final/" +filePath;
+        filePath = System.getProperty("user.dir")+"/" +filePath;
         try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 
