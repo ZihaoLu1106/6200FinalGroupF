@@ -17,6 +17,12 @@ Here is the tutorial for this system: (MORE DETAIL AND INSTRUCTIONS ARE STORED I
  
 8.	That is the all the functionality of Daycare system. All the changes in this system is stored in the output.txt file for management purpose.
 
+Video demo:
+https://drive.google.com/drive/folders/1Zvsd20JUNR6r17kAQIiHOXNChCCzVR5H?usp=sharing
+
+PowerPoint demo:
+https://docs.google.com/presentation/d/1tV66H3JLFViO2LAw9qp94LTAj0stovyWxhY1nsb2TIQ/edit?usp=sharing
+
 
 Team Detail Contribution:
 
