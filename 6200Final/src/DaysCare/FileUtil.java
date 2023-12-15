@@ -80,7 +80,7 @@ public class FileUtil {
             }
         }
 
-        String filePath = System.getProperty("user.dir") + "/6200final/src/DaysCare/Data/Output.txt";
+        String filePath = System.getProperty("user.dir") + "/src/DaysCare/Data/Output.txt";
         File file = new File(filePath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(sb.toString());

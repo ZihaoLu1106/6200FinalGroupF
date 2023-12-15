@@ -37,7 +37,10 @@ public class SingletonAdmin {
     static List<Student> studentList;//used to store all student
     static List<Teacher> teacherList;//used to store all teachers
     static List<Immunization> immunizationList;//use to store all immunizations
+    
+    
     private static final SingletonAdmin instance = new SingletonAdmin();
+    
     private static Map<Student, RegistrationRecord> registrationMap = new HashMap<>();//use to store registration data
 
 

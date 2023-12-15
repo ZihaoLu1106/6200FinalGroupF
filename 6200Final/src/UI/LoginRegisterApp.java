@@ -207,6 +207,7 @@ private static boolean registerUser(String username, String password, String con
 
         // 在列表末尾添加新用户信息
         lines.add(username + "," + password);
+        //System.out.println(lines);
 
         // 使用绝对路径获取文件
         Path filePath = Paths.get(LoginRegisterApp.class.getResource(resourcePath).toURI());
@@ -214,7 +215,7 @@ private static boolean registerUser(String username, String password, String con
         // 将更新后的内容写回文件（覆盖整个文件）
         Files.write(filePath, lines, StandardCharsets.UTF_8);
 
-        System.out.println("用户注册成功：" + username);
+        System.out.println("Register：" + username);
         return true;
 
     } catch (IOException | URISyntaxException e) {
