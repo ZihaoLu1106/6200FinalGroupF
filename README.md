@@ -19,11 +19,18 @@ Here is the tutorial for this system: (MORE DETAIL AND INSTRUCTIONS ARE STORED I
 
 
 Team Detail Contribution:
+
 Zihal Lu: Project Manager, UI design, Build basic project framework and Video Recording
+
 Siyuen Liu: Function implementation and code maintenance
+
 Haonan Chen: UML Design, code maintenance and PowerPoint Design
+
 Jiawei Liao: Function implementation, code maintenance and write instruction file
+
 Dongyu Liu: Function implementation and code maintenance
+
 MingTse Chen: Code review and maintenance
+
 Xuanli Liu: Function implementation and code maintenance
 
